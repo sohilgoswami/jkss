@@ -11,6 +11,9 @@ function Menubar(){
     return(
       <AppBar position="static">
       <Toolbar>
+        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          JKSS Grade Distributions
+        </Typography>
         <IconButton
             size="large"
             edge="start"
@@ -20,9 +23,6 @@ function Menubar(){
           >
             <MenuIcon />
         </IconButton>
-        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-          JKSS Grade Distributions
-        </Typography>
       </Toolbar>
       </AppBar>
     )
