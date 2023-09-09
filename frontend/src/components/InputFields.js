@@ -1,10 +1,13 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Grid } from '@mui/material';
+import { Grid, Container, Paper} from '@mui/material';
 
 export default function InputFields() {
   return (
+    <React.Fragment>
+    <Container maxWidth="lg" sx={{ mb: 4 }}>
+    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, bgcolor: '#B5E2FF'}} >
     <Grid container spacing = {3}>
         <Grid item xs={12} sm={6}>
           <Autocomplete
@@ -23,6 +26,9 @@ export default function InputFields() {
           />
         </Grid>
     </Grid>
+    </Paper>
+    </Container>
+    </React.Fragment>
   );
 }
 
