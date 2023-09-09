@@ -1,29 +1,36 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Grid, Container, Paper} from '@mui/material';
+import { Grid, Container, Paper, Button} from '@mui/material';
 
 export default function InputFields() {
   return (
     <React.Fragment>
     <Container maxWidth="lg" sx={{ mb: 4 }}>
-    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, bgcolor: '#B5E2FF'}} >
+    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, bgcolor: '#9e2b56'}} >
     <Grid container spacing = {3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={5.4}>
           <Autocomplete
             disablePortal
             id="combo-box-demo"
+            sx = {{bgcolor: '#FFFFFF'}}
             options={top100Films}
             renderInput={(params) => <TextField {...params} label="Subject" />}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={5.4}>
           <Autocomplete
             disablePortal
             id="combo-box-demo"
+            sx = {{bgcolor: '#FFFFFF'}}
             options={top100Films}
             renderInput={(params) => <TextField {...params} label="Course Code" />}
           />
+        </Grid>
+        <Grid item xs={12} sm={1}>
+            <Button variant="contained" sx = {{bgcolor: '#EA3B52'}}>
+                Search
+            </Button>
         </Grid>
     </Grid>
     </Paper>

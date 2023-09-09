@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 function Menubar(){
     return(
-      <AppBar position="static">
+      <AppBar position="static" sx = {{bgcolor: '#6a1d3a'}}>
       <Toolbar>
         <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
           JKSS Grade Distributions
