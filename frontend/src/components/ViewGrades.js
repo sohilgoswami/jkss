@@ -123,8 +123,13 @@ export default function ViewGrades(){
           <TableHead>
             <TableRow sx = {{bgcolor: '#C32148'}} >
               <TableCell sx = {{fontSize: 16}}>Course</TableCell>
-              <TableCell sx = {{fontSize: 16}}>Grade</TableCell>
               <TableCell sx = {{fontSize: 16}}>Professor</TableCell>
+              <TableCell sx = {{fontSize: 16}}>% of As</TableCell>
+              <TableCell sx = {{fontSize: 16}}>% of Bs</TableCell>
+              <TableCell sx = {{fontSize: 16}}>% of Cs</TableCell>
+              <TableCell sx = {{fontSize: 16}}>% of Ds</TableCell>
+              <TableCell sx = {{fontSize: 16}}>% of Fs</TableCell>
+              <TableCell sx = {{fontSize: 16}}>GPA</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

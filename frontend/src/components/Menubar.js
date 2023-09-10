@@ -8,10 +8,23 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import HouseIcon from '@mui/icons-material/House';
 
+import Image from 'mui-image'
+
 function Menubar(){
     return(
       <AppBar position="static" sx = {{bgcolor: '#6a1d3a'}}>
       <Toolbar>
+        <Button href="/" sx={{ ml: '15px' }}>
+          <Box
+            component="img"
+            sx={{
+              height: 65,
+              width: 65,
+            }}
+            
+            src= "https://i.ibb.co/Dzv59KK/MAROON-REV.png"
+          />
+        </Button>
         <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
           JKSS Grade Distributions
         </Typography>

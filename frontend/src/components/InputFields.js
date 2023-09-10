@@ -1,8 +1,9 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Grid, Container, Paper, Button} from '@mui/material';
+import { Grid, Container, Paper, Button, Card, CardMedia} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material';
 
 export default function InputFields() {
   const navigate = useNavigate();
@@ -38,6 +39,14 @@ export default function InputFields() {
         </Grid>
     </Grid>
     </Paper>
+    </Container>
+    <Container>
+        <Card>
+          <CardMedia
+           component="img"
+           src= 'https://i.ibb.co/wsqJ2hK/REV-PNG-CROPPED.png" alt="REV-PNG-CROPPED'
+          />
+        </Card>
     </Container>
     </React.Fragment>
   );
