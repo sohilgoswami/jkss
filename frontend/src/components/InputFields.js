@@ -4,9 +4,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { Grid, Container, Paper, Button, Card, CardMedia} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material';
+import { useState } from 'react';
 
 export default function InputFields() {
   const navigate = useNavigate();
+  const [code, setCode] = useState('')
   return (
     <React.Fragment>
     <Container maxWidth="lg" sx={{ mb: 4 }}>
@@ -18,21 +20,26 @@ export default function InputFields() {
             id="combo-box-demo"
             sx = {{bgcolor: '#FFFFFF'}}
             options={courseSubject}
-            renderInput={(params) => <TextField {...params} label="Subject" />}
+            renderInput={(params) => <TextField {...params} label="Subject"/>}
           />
         </Grid>
         <Grid item xs={12} sm={5.4}>
           <Autocomplete
             disablePortal
+            value={code}
+            onChange={(event, newValue) => {
+              setCode(newValue.label);
+            }}
             id="combo-box-demo"
             sx = {{bgcolor: '#FFFFFF'}}
             options={courseCodes}
-            renderInput={(params) => <TextField {...params} label="Course Code" />}
+            renderInput={(params) => <TextField {...params} label="Course Code" value={code} onChange={(e) => setCode(e.target.value)}/>}
           />
         </Grid>
         <Grid item xs={12} sm={1}>
             <Button variant="contained" sx = {{bgcolor: '#EA3B52'}}
-              href = '/viewGrades'
+              
+              onClick={() =>{{navigate('/viewGrades/'+ code, {replace:true})} }}
             >
                 Search
             </Button>

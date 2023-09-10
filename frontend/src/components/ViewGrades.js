@@ -80,24 +80,14 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, calories, fat) {
-  return { name, calories, fat };
+function createData(course, professor, as, bs, cs, ds, fs, GPA) {
+  return { course, professor, as, bs, cs, ds, fs, GPA };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
+  createData('CHEM 107', 'Altemose A','27.86%', '38.71%','25.81','5.28%','2.35%','2.844'),
+  createData('CHEM 107', 'Goodey J','22.12%', '36.87%','29.49%','5.99%','5.53%','2.640'),
+  createData('CHEM 107', 'Wang X','23.68%', '31.58%','23.68','15.79%','5.26%','2.844'),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
 export default function ViewGrades(){
@@ -139,13 +129,28 @@ export default function ViewGrades(){
             ).map((row) => (
               <TableRow key={row.name}> 
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row.course}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
-                  {row.calories}
+                <TableCell  align="right">
+                  {row.professor}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
-                  {row.fat}
+                <TableCell  align="right">
+                  {row.as}
+                </TableCell>
+                <TableCell align="right">
+                  {row.bs}
+                </TableCell>
+                <TableCell align="right">
+                  {row.cs}
+                </TableCell>
+                <TableCell align="right">
+                  {row.ds}
+                </TableCell>
+                <TableCell align="right">
+                  {row.fs}
+                </TableCell>
+                <TableCell align="right">
+                  {row.GPA}
                 </TableCell>
               </TableRow>
             ))}
@@ -159,7 +164,7 @@ export default function ViewGrades(){
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                colSpan={3}
+                colSpan={8}
                 count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

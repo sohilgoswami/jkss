@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path ="/" element={<InputFields/>} />
-          <Route path = "/viewGrades" element={<ViewGrades/>}/>
+          <Route path = "/viewGrades/:code" element={<ViewGrades/>}/>
         </Routes>
       </BrowserRouter>
     </div>
