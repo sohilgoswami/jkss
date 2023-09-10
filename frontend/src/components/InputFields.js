@@ -1,12 +1,15 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+<<<<<<< Updated upstream
 import { Grid, Container, Paper, Button, Card, CardMedia} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material';
+=======
+import { Grid, Container, Paper, Button} from '@mui/material';
+>>>>>>> Stashed changes
 
 export default function InputFields() {
-  const navigate = useNavigate();
   return (
     <React.Fragment>
     <Container maxWidth="lg" sx={{ mb: 4 }}>
@@ -17,7 +20,7 @@ export default function InputFields() {
             disablePortal
             id="combo-box-demo"
             sx = {{bgcolor: '#FFFFFF'}}
-            options={courseSubject}
+            options={top100Films}
             renderInput={(params) => <TextField {...params} label="Subject" />}
           />
         </Grid>
@@ -26,14 +29,12 @@ export default function InputFields() {
             disablePortal
             id="combo-box-demo"
             sx = {{bgcolor: '#FFFFFF'}}
-            options={courseCodes}
+            options={top100Films}
             renderInput={(params) => <TextField {...params} label="Course Code" />}
           />
         </Grid>
         <Grid item xs={12} sm={1}>
-            <Button variant="contained" sx = {{bgcolor: '#EA3B52'}}
-              href = '/viewGrades'
-            >
+            <Button variant="contained" sx = {{bgcolor: '#EA3B52'}}>
                 Search
             </Button>
         </Grid>
@@ -52,22 +53,7 @@ export default function InputFields() {
   );
 }
 
-const courseSubject = [
-  { label: 'CHEM' },
-  { label: 'MATH'},
-  { label: 'PHYS'},
+// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
+const top100Films = [
+  
 ];
-
-const courseCodes= [
-    { label: '107' },
-    { label: '117'},
-    { label: '119'},
-    { label: '120'},
-    { label: '150' },
-    { label: '151'},
-    { label: '152'},
-    { label: '206'},
-    { label: '207'},
-    { label: '216'},
-  ];
-
