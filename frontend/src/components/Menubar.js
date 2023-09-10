@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import HouseIcon from '@mui/icons-material/House';
 
 function Menubar(){
     return(
@@ -15,13 +16,13 @@ function Menubar(){
           JKSS Grade Distributions
         </Typography>
         <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
+          id="basic-button"
+          size = 'large'
+          color = 'inherit'
+          style={{ marginLeft: "auto" }} 
+          href = '/'
+        >
+          <HouseIcon/>
         </IconButton>
       </Toolbar>
       </AppBar>
