@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Backend and JavaScript Frontend</title>
+</head>
+<body>
+    <h1>Frontend Content</h1>
+    <p id="backend-data"></p>
+
+    <script>
+        // Fetch data from the Python backend
+        fetch('/api/data')
+            .then(response => response.json())
+            .then(data => {
+                // Update the frontend with data from the backend
+                document.getElementById('backend-data').textContent = data.message;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
