@@ -2,6 +2,8 @@ from flask import Flask, jsonify, request
 import requests
 import fitz  # PyMuPDF
 from math import *
+import numpy as np
+import json
 
 app = Flask(__name__)
 
@@ -217,122 +219,68 @@ chunks_150 = None
 chunks_151 = None
 chunks_152 = None
 chunks_251 = None
-
-# @app.route("/api/load-data", methods=["GET"])
-# def load_data():
-#     pdf_text = extract_text_from_pdf(pdf_url)
-#     chem_107_to_117_data = collect_data_between_107_and_117(pdf_text)
-
-#     # Print the collected data
-#     lines_107 = [line.strip() for line in chem_107_to_117_data]
-#     global chunks_107
-#     chunks_107 = [lines_107[x:x + 15] for x in range(0, len(lines), 15)]
-#     chunks_107 = chunks_107[:-1]
-
-#     print(chunks_107)
-
-#     i = -1
-#     while i <= len(chunks_107):
-#         i = i + 1
-#         print(f"The course code is: {chunks_107[i][0]}")
-#         print(f"The professor is: {chunks_107[i][14]}")
-#         print(f"The percentage of A's in her class is: {chunks_107[i][2]}")
-#         print(f"The percentage of B's in her class is: {chunks_107[i][4]}")
-#         print(f"The percentage of C's in her class is: {chunks_107[i][6]}")
-#         print(f"The percentage of D's in her class is: {chunks_107[i][8]}")
-#         print(f"The percentage of F's in her class is: {chunks_107[i][10]}")
-#         print(f"The average GPA in her class is: {chunks_107[i][12]}")
-#         if i == (len(chunks_107)-1):
-#             break
-#     #return "Data loaded! Hooray!"
-
-#     chem_117_to_119_data = collect_data_between_117_and_119(pdf_text)
-
-
-#     # Print the collected data
-#     lines = [line.strip() for line in chem_117_to_119_data]
-#     global chunks_117
-#     chunks_117 = [lines[x:x + 15] for x in range(0, len(lines), 15)]
-#     chunks_117 = chunks_117[:-1]     
-
-#     print(chunks_117)
-
-#     i = -1
-#     while i <= len(chunks_117):
-#         i = i + 1
-#         print(f"The course code is: {chunks_117[i][0]}")
-#         print(f"The professor is: {chunks_117[i][14]}")
-#         print(f"The percentage of A's in her class is: {chunks_117[i][2]}")
-#         print(f"The percentage of B's in her class is: {chunks_117[i][4]}")
-#         print(f"The percentage of C's in her class is: {chunks_117[i][6]}")
-#         print(f"The percentage of D's in her class is: {chunks_117[i][8]}")
-#         print(f"The percentage of F's in her class is: {chunks_117[i][10]}")
-#         print(f"The average GPA in her class is: {chunks_117[i][12]}")
-#         if i == (len(chunks_117)-1):
-#             break
-#     return "Data loaded! Hooray!"
  
 #API for CHEM-107
 @app.route('/api/data-chunks-107', methods=['GET'])
 def get_data_chunks_107():
-    my_dict = {
-        }
-    return jsonify(chunks_107)
+    return json.dumps(dict_107)
 
 #API for CHEM-117
 @app.route('/api/data-chunks-117', methods=['GET'])
 def get_data_chunks_117():
-    return jsonify(chunks_117)
+    return json.dumps(dict_117)
 
 #API for CHEM-119
 @app.route('/api/data-chunks-119', methods=['GET'])
 def get_data_chunks_119():
-    return jsonify(chunks_119)
+    return json.dumps(dict_119)
 
 #API for CHEM-120
 @app.route('/api/data-chunks-120', methods=['GET'])
 def get_data_chunks_120():
-    return jsonify(chunks_120)
+    return json.dumps(dict_120)
 
 #API for PHYS-206
 @app.route('/api/data-chunks-206', methods=['GET'])
 def get_data_chunks_206():
-    return jsonify(chunks_206)
+    return json.dumps(dict_206)
 
 #API for PHYS-207
 @app.route('/api/data-chunks-207', methods=['GET'])
 def get_data_chunks_207():
-    return jsonify(chunks_207)
+    return json.dumps(dict_207)
 
 #API for PHYS-216
 @app.route('/api/data-chunks-216', methods=['GET'])
 def get_data_chunks_216():
-    return jsonify(chunks_216)
+    return json.dumps(dict_216)
 
 #API for MATH-150
 @app.route('/api/data-chunks-150', methods=['GET'])
 def get_data_chunks_150():
-    return jsonify(chunks_150)
+    return json.dumps(dict_150)
 
 #API for MATH-151
 @app.route('/api/data-chunks-151', methods=['GET'])
 def get_data_chunks_151():
-    return jsonify(chunks_151)
+    return json.dumps(dict_151)
 
 #API for MATH-152
 @app.route('/api/data-chunks-152', methods=['GET'])
 def get_data_chunks_152():
-    return jsonify(chunks_152)
+    return json.dumps(dict_152)
 
 #API for MATH-251
 @app.route('/api/data-chunks-251', methods=['GET'])
 def get_data_chunks_251():
-    return jsonify(chunks_251)
+    return json.dumps(dict_251)
 
 
 
 if __name__ == '__main__':
     pdf_text = extract_text_from_pdf(pdf_url)
+
+                                          #107
     chem_107_to_117_data = collect_data_between_107_and_117(pdf_text)
 
     # Print the collected data
@@ -342,102 +290,175 @@ if __name__ == '__main__':
 
     print(chunks_107)
 
+    prof_107 = np.array([])
+    course_107 = np.array([])
+    a_107 = np.array([])
+    b_107 = np.array([])
+    c_107 = np.array([])
+    d_107  = np.array([])
+    f_107 = np.array([])
+    agpa_107 = np.array([])
+
+    prof_107 = prof_107.tolist()
+    course_107 = course_107.tolist()
+    a_107 = a_107.tolist()
+    b_107 = b_107.tolist()
+    c_107 = c_107.tolist()
+    d_107  = d_107.tolist()
+    f_107 = f_107.tolist()
+    agpa_107 = agpa_107.tolist()
+    
     i = -1
+    dict_107 = {
+                 "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_107):
         i = i + 1
-        # print(f"The course code is: {chunks_107[i][0]}")
-        # print(f"The professor is: {chunks_107[i][14]}")
-        # print(f"The percentage of A's in her class is: {chunks_107[i][2]}")
-        # print(f"The percentage of B's in her class is: {chunks_107[i][4]}")
-        # print(f"The percentage of C's in her class is: {chunks_107[i][6]}")
-        # print(f"The percentage of D's in her class is: {chunks_107[i][8]}")
-        # print(f"The percentage of F's in her class is: {chunks_107[i][10]}")
-        # print(f"The average GPA in her class is: {chunks_107[i][12]}")
-        dict_107 = {
-            # "course code": chunks_107[i][0],
-            # "professor": chunks_107[i][14],
-            # "a_percentage": chunks_107[i][2],
-            # "b_percentage": chunks_107[i][4],
-            # "c_percentage": chunks_107[i][6],
-            # "d_percentage": chunks_107[i][8],
-            # "f_percentage": chunks_107[i][10],
-            # "average_GPA": chunks_107[i][12]
-            "lists": chunks_107[i]
-        }
+        if "%" in str(chunks_107[i][2]) :
+            dict_107['Professor'].append(chunks_107[i][14])
+            dict_107['Course_Code'].append(chunks_107[i][0])
+            dict_107['A%'].append(chunks_107[i][2])
+            dict_107['B%'].append(chunks_107[i][4])
+            dict_107['C%'].append(chunks_107[i][6])
+            dict_107['D%'].append(chunks_107[i][8])
+            dict_107['F%'].append(chunks_107[i][10])
+            dict_107['AGPA'].append(chunks_107[i][12])
+            
+        print(dict_107)
 
         if i == (len(chunks_107)-1):
             break
-    #return "Data loaded! Hooray!"
 
+                             #117
+                                        
     chem_117_to_119_data = collect_data_between_117_and_119(pdf_text)
 
 
     # Print the collected data
     lines_117 = [line.strip() for line in chem_117_to_119_data]
     chunks_117 = [lines_117[x:x + 15] for x in range(0, len(lines_117), 15)]
-    chunks_117 = chunks_117[:-1]     
+    chunks_117 = chunks_117[:-1]   
 
-    print(chunks_117)
+    prof_117 = np.array([])
+    course_117 = np.array([])
+    a_117 = np.array([])
+    b_117 = np.array([])
+    c_117 = np.array([])
+    d_117  = np.array([])
+    f_117 = np.array([])
+    agpa_117 = np.array([])
 
+    prof_117 = prof_117.tolist()
+    course_117 = course_117.tolist()
+    a_117 = a_117.tolist()
+    b_117 = b_117.tolist()
+    c_117 = c_117.tolist()
+    d_117  = d_117.tolist()
+    f_117 = f_117.tolist()
+    agpa_117 = agpa_117.tolist()
+    
     i = -1
+    dict_117 = {
+                 "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_117):
         i = i + 1
-        # print(f"The course code is: {chunks_117[i][0]}")
-        # print(f"The professor is: {chunks_117[i][14]}")
-        # print(f"The percentage of A's in her class is: {chunks_117[i][2]}")
-        # print(f"The percentage of B's in her class is: {chunks_117[i][4]}")
-        # print(f"The percentage of C's in her class is: {chunks_117[i][6]}")
-        # print(f"The percentage of D's in her class is: {chunks_117[i][8]}")
-        # print(f"The percentage of F's in her class is: {chunks_117[i][10]}")
-        # print(f"The average GPA in her class is: {chunks_117[i][12]}")
-        dict_117 = {
-            # "course code": chunks_117[i][0],
-            # "professor": chunks_117[i][14],
-            # "a_percentage": chunks_117[i][2],
-            # "b_percentage": chunks_117[i][4],
-            # "c_percentage": chunks_117[i][6],
-            # "d_percentage": chunks_117[i][8],
-            # "f_percentage": chunks_117[i][10],
-            # "average_GPA": chunks_117[i][12]
-            "lists": chunks_117[i]
-        }
+        if "%" in str(chunks_117[i][2]) :
+            dict_117['Professor'].append(chunks_117[i][14])
+            dict_117['Course_Code'].append(chunks_117[i][0])
+            dict_117['A%'].append(chunks_117[i][2])
+            dict_117['B%'].append(chunks_117[i][4])
+            dict_117['C%'].append(chunks_117[i][6])
+            dict_117['D%'].append(chunks_117[i][8])
+            dict_117['F%'].append(chunks_117[i][10])
+            dict_117['AGPA'].append(chunks_117[i][12])
+            
+            print(dict_117)
+
         if i == (len(chunks_117)-1):
             break
 
-    chem_119_to_120_data = collect_data_between_119_and_120(pdf_text)
+     
+
+
+
+
+                    #Chem 119
+
+        chem_119_to_120_data = collect_data_between_119_and_120(pdf_text)
 
 # Print the collected data
     lines_119 = [line.strip() for line in chem_119_to_120_data]
     chunks_119 = [lines_119[x:x + 15] for x in range(0, len(lines_119), 15)]
     chunks_119 = chunks_119[:-1]     
 
-    print(chunks_119)
+    prof_119 = np.array([])
+    course_119 = np.array([])
+    a_119 = np.array([])
+    b_119 = np.array([])
+    c_119 = np.array([])
+    d_119  = np.array([])
+    f_119 = np.array([])
+    agpa_119 = np.array([])
 
+    prof_119 = prof_119.tolist()
+    course_119 = course_119.tolist()
+    a_119= a_119.tolist()
+    b_119 = b_119.tolist()
+    c_119 = c_119.tolist()
+    d_119  = d_119.tolist()
+    f_119 = f_119.tolist()
+    agpa_119 = agpa_119.tolist()
+    
     i = -1
+    dict_119 = {   "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_119):
         i = i + 1
-        # print(f"The course code is: {chunks_119[i][0]}")
-        # print(f"The professor is: {chunks_119[i][14]}")
-        # print(f"The percentage of A's in her class is: {chunks_119[i][2]}")
-        # print(f"The percentage of B's in her class is: {chunks_119[i][4]}")
-        # print(f"The percentage of C's in her class is: {chunks_119[i][6]}")
-        # print(f"The percentage of D's in her class is: {chunks_119[i][8]}")
-        # print(f"The percentage of F's in her class is: {chunks_119[i][10]}")
-        # print(f"The average GPA in her class is: {chunks_119[i][12]}")
-        dict_117 = {
-            # "course code": chunks_119[i][0],
-            # "professor": chunks_119[i][14],
-            # "a_percentage": chunks_119[i][2],
-            # "b_percentage": chunks_119[i][4],
-            # "c_percentage": chunks_119[i][6],
-            # "d_percentage": chunks_119[i][8],
-            # "f_percentage": chunks_119[i][10],
-            # "average_GPA": chunks_119[i][12]
-            "lists": chunks_119[i]
-        }
+        if "%" in str(chunks_119[i][2]) :
+            dict_119['Professor'].append(chunks_119[i][14])
+            dict_119['Course_Code'].append(chunks_119[i][0])
+            dict_119['A%'].append(chunks_119[i][2])
+            dict_119['B%'].append(chunks_119[i][4])
+            dict_119['C%'].append(chunks_119[i][6])
+            dict_119['D%'].append(chunks_119[i][8])
+            dict_119['F%'].append(chunks_119[i][10])
+            dict_119['AGPA'].append(chunks_119[i][12])
+            
+            print(dict_119)
+
         if i == (len(chunks_119)-1):
             break
+    
+    
+    
 
+    
+                        #Chem 120
     chem_120_to_222_data = collect_data_between_120_and_222(pdf_text)
 
 # Print the collected data
@@ -445,35 +466,54 @@ if __name__ == '__main__':
     chunks_120 = [lines_120[x:x + 15] for x in range(0, len(lines_120), 15)]
     chunks_120 = chunks_120[:-1]     
 
-    print(chunks_120)
+    prof_120 = np.array([])
+    course_120 = np.array([])
+    a_120 = np.array([])
+    b_120 = np.array([])
+    c_120 = np.array([])
+    d_120  = np.array([])
+    f_120 = np.array([])
+    agpa_120 = np.array([])
 
+    prof_120 = prof_120.tolist()
+    course_120 = course_120.tolist()
+    a_120= a_120.tolist()
+    b_120 = b_120.tolist()
+    c_120 = c_120.tolist()
+    d_120  = d_120.tolist()
+    f_120 = f_120.tolist()
+    agpa_120 = agpa_120.tolist()
+    
     i = -1
+    dict_120 = {   "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_120):
         i = i + 1
-        # print(f"The course code is: {chunks_120[i][0]}")
-        # print(f"The professor is: {chunks_120[i][14]}")
-        # print(f"The percentage of A's in her class is: {chunks_120[i][2]}")
-        # print(f"The percentage of B's in her class is: {chunks_120[i][4]}")
-        # print(f"The percentage of C's in her class is: {chunks_120[i][6]}")
-        # print(f"The percentage of D's in her class is: {chunks_120[i][8]}")
-        # print(f"The percentage of F's in her class is: {chunks_120[i][10]}")
-        # print(f"The average GPA in her class is: {chunks_120[i][12]}")
-        dict_120 = {
-            # "course code": chunks_120[i][0],
-            # "professor": chunks_120[i][14],
-            # "a_percentage": chunks_120[i][2],
-            # "b_percentage": chunks_120[i][4],
-            # "c_percentage": chunks_120[i][6],
-            # "d_percentage": chunks_120[i][8],
-            # "f_percentage": chunks_120[i][10],
-            # "average_GPA": chunks_120[i][12]
-            "lists": chunks_120[i]
-        }
+        if "%" in str(chunks_120[i][2]) :
+            dict_120['Professor'].append(chunks_120[i][14])
+            dict_120['Course_Code'].append(chunks_120[i][0])
+            dict_120['A%'].append(chunks_120[i][2])
+            dict_120['B%'].append(chunks_120[i][4])
+            dict_120['C%'].append(chunks_120[i][6])
+            dict_120['D%'].append(chunks_120[i][8])
+            dict_120['F%'].append(chunks_120[i][10])
+            dict_120['AGPA'].append(chunks_120[i][12])
+            
+            print(dict_120)
+
         if i == (len(chunks_120)-1):
             break
 
 
-    
+                #Physics 206
     phys_206_to_207_data = collect_data_between_206_and_207(pdf_text)
 
 
@@ -482,18 +522,54 @@ if __name__ == '__main__':
     chunks_206 = [lines_206[x:x + 15] for x in range(0, len(lines_206), 15)]
     chunks_206 = chunks_206[:-1]     
 
-    print(chunks_206)
+    prof_206 = np.array([])
+    course_206 = np.array([])
+    a_206 = np.array([])
+    b_206 = np.array([])
+    c_206 = np.array([])
+    d_206  = np.array([])
+    f_206 = np.array([])
+    agpa_206 = np.array([])
 
+    prof_206 = prof_206.tolist()
+    course_206= course_206.tolist()
+    a_206= a_206.tolist()
+    b_206= b_206.tolist()
+    c_206 = c_206.tolist()
+    d_206  = d_206.tolist()
+    f_120 = f_206.tolist()
+    agpa_120 = agpa_206.tolist()
+    
     i = -1
+    dict_206 = {   "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_206):
         i = i + 1
-        dict_206 = {
-            "lists": chunks_206[i]
-        }
+        if "%" in str(chunks_206[i][2]) :
+            dict_206['Professor'].append(chunks_206[i][14])
+            dict_206['Course_Code'].append(chunks_206[i][0])
+            dict_206['A%'].append(chunks_206[i][2])
+            dict_206['B%'].append(chunks_206[i][4])
+            dict_206['C%'].append(chunks_206[i][6])
+            dict_206['D%'].append(chunks_206[i][8])
+            dict_206['F%'].append(chunks_206[i][10])
+            dict_206['AGPA'].append(chunks_206[i][12])
+            
+            print(dict_206)
+
         if i == (len(chunks_206)-1):
             break
 
 
+                #Physics 207
     phys_207_to_216_data = collect_data_between_207_and_216(pdf_text)
 
 
