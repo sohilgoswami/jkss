@@ -537,7 +537,7 @@ if __name__ == '__main__':
     b_206= b_206.tolist()
     c_206 = c_206.tolist()
     d_206  = d_206.tolist()
-    f_120 = f_206.tolist()
+    f_206 = f_206.tolist()
     agpa_120 = agpa_206.tolist()
     
     i = -1
@@ -578,18 +578,53 @@ if __name__ == '__main__':
     chunks_207 = [lines_207[x:x + 15] for x in range(0, len(lines_207), 15)]
     chunks_207 = chunks_207[:-1]     
 
-    print(chunks_207)
+    prof_207 = np.array([])
+    course_207 = np.array([])
+    a_207 = np.array([])
+    b_207 = np.array([])
+    c_207 = np.array([])
+    d_207  = np.array([])
+    f_207 = np.array([])
+    agpa_207 = np.array([])
 
+    prof_207 = prof_207.tolist()
+    course_207= course_207.tolist()
+    a_207 = a_207.tolist()
+    b_207 = b_207.tolist()
+    c_207 = c_207.tolist()
+    d_207  = d_207.tolist()
+    f_207 = f_207.tolist()
+    agpa_207 = agpa_207.tolist()
+    
     i = -1
+    dict_207 = {   "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_207):
         i = i + 1
-        dict_216 = {
-            "lists": chunks_207[i]
-        }
+        if "%" in str(chunks_207[i][2]) :
+            dict_207['Professor'].append(chunks_207[i][14])
+            dict_207['Course_Code'].append(chunks_207[i][0])
+            dict_207['A%'].append(chunks_207[i][2])
+            dict_207['B%'].append(chunks_207[i][4])
+            dict_207['C%'].append(chunks_207[i][6])
+            dict_207['D%'].append(chunks_207[i][8])
+            dict_207['F%'].append(chunks_207[i][10])
+            dict_207['AGPA'].append(chunks_207[i][12])
+            
+            print(dict_207)
+
         if i == (len(chunks_207)-1):
             break
-        
     
+                    #Physics / ENGR 216
     phys_216_to_217_data = collect_data_between_216_and_217(pdf_text)
 
 
@@ -598,35 +633,108 @@ if __name__ == '__main__':
     chunks_216 = [lines_216[x:x + 15] for x in range(0, len(lines_216), 15)]
     chunks_216 = chunks_216[:-1]     
 
-    print(chunks_216)
+    prof_216 = np.array([])
+    course_216 = np.array([])
+    a_216 = np.array([])
+    b_216 = np.array([])
+    c_216 = np.array([])
+    d_216  = np.array([])
+    f_216 = np.array([])
+    agpa_216 = np.array([])
 
+    prof_216 = prof_216.tolist()
+    course_216 = course_216.tolist()
+    a_216 = a_216.tolist()
+    b_216 = b_216.tolist()
+    c_216 = c_216.tolist()
+    d_216  = d_216.tolist()
+    f_216 = f_216.tolist()
+    agpa_216 = agpa_216.tolist()
+    
     i = -1
+    dict_216 = {   "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_216):
         i = i + 1
-        dict_216 = {
-            "lists": chunks_216[i]
-        }
+        if "%" in str(chunks_216[i][2]) :
+            dict_216['Professor'].append(chunks_216[i][14])
+            dict_216['Course_Code'].append(chunks_216[i][0])
+            dict_216['A%'].append(chunks_216[i][2])
+            dict_216['B%'].append(chunks_216[i][4])
+            dict_216['C%'].append(chunks_216[i][6])
+            dict_216['D%'].append(chunks_216[i][8])
+            dict_216['F%'].append(chunks_216[i][10])
+            dict_216['AGPA'].append(chunks_216[i][12])
+            
+            print(dict_216)
+
         if i == (len(chunks_216)-1):
             break
 
+                        #Math 150
     math_150_to_151_data = collect_data_between_150_and_151(pdf_text)
+
 
 # Print the collected data
     lines_150 = [line.strip() for line in math_150_to_151_data]
     chunks_150 = [lines_150[x:x + 15] for x in range(0, len(lines_150), 15)]
-    chunks_150 = chunks_150[:-1]     
+    chunks_150 = chunks_150[:-1]    
 
-    print(chunks_150)
+    prof_150 = np.array([])
+    course_150 = np.array([])
+    a_150 = np.array([])  
+    b_150 = np.array([])
+    c_150 = np.array([])
+    d_150  = np.array([])
+    f_150 = np.array([])
+    agpa_150 = np.array([])
 
+    prof_150 = prof_150.tolist()
+    course_150 = course_150.tolist()
+    a_150 = a_150.tolist()
+    b_150 = b_150.tolist()
+    c_150 = c_150.tolist()
+    d_150  = d_150.tolist()
+    f_150 = f_150.tolist()
+    agpa_150 = agpa_150.tolist()
+    
     i = -1
+    dict_150 = {   "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_150):
         i = i + 1
-        dict_150 = {
-            "lists": chunks_150[i]
-        }
+        if "%" in str(chunks_150[i][2]) :
+            dict_150['Professor'].append(chunks_150[i][14])
+            dict_150['Course_Code'].append(chunks_150[i][0])
+            dict_150['A%'].append(chunks_150[i][2])
+            dict_150['B%'].append(chunks_150[i][4])
+            dict_150['C%'].append(chunks_150[i][6])
+            dict_150['D%'].append(chunks_150[i][8])
+            dict_150['F%'].append(chunks_150[i][10])
+            dict_150['AGPA'].append(chunks_150[i][12])
+            
+            print(dict_150)
+
         if i == (len(chunks_150)-1):
             break
 
+                            #Math 151
     math_151_to_152_data = collect_data_between_151_and_152(pdf_text)
 
 
@@ -635,17 +743,53 @@ if __name__ == '__main__':
     chunks_151 = [lines_151[x:x + 15] for x in range(0, len(lines_151), 15)]
     chunks_151 = chunks_151[:-1]     
 
-    print(chunks_151)
+    prof_151 = np.array([])
+    course_151 = np.array([])
+    a_151 = np.array([])  
+    b_151 = np.array([])
+    c_151 = np.array([])
+    d_151  = np.array([])
+    f_151 = np.array([])
+    agpa_151 = np.array([])
 
+    prof_151 = prof_151.tolist()
+    course_151 = course_151.tolist()
+    a_151 = a_151.tolist()
+    b_151 = b_151.tolist()
+    c_151 = c_151.tolist()
+    d_151  = d_151.tolist()
+    f_151 = f_151.tolist()
+    agpa_151 = agpa_151.tolist()
+    
     i = -1
+    dict_151 = {   "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_151):
         i = i + 1
-        dict_151 = {
-            "lists": chunks_151[i]
-        }
+        if "%" in str(chunks_151[i][2]) :
+            dict_151['Professor'].append(chunks_151[i][14])
+            dict_151['Course_Code'].append(chunks_151[i][0])
+            dict_151['A%'].append(chunks_151[i][2])
+            dict_151['B%'].append(chunks_151[i][4])
+            dict_151['C%'].append(chunks_151[i][6])
+            dict_151['D%'].append(chunks_151[i][8])
+            dict_151['F%'].append(chunks_151[i][10])
+            dict_151['AGPA'].append(chunks_151[i][12])
+            
+            print(dict_151)
+
         if i == (len(chunks_151)-1):
             break
 
+                        #Math 152
     math_152_to_167_data = collect_data_between_152_and_167(pdf_text)
 
 
@@ -654,17 +798,53 @@ if __name__ == '__main__':
     chunks_152 = [lines_152[x:x + 15] for x in range(0, len(lines_152), 15)]
     chunks_152 = chunks_152[:-1]     
 
-    print(chunks_152)
+    prof_152 = np.array([])
+    course_152 = np.array([])
+    a_152 = np.array([])  
+    b_152 = np.array([])
+    c_152 = np.array([])
+    d_152  = np.array([])
+    f_152 = np.array([])
+    agpa_152 = np.array([])
 
+    prof_152 = prof_152.tolist()
+    course_152 = course_152.tolist()
+    a_152 = a_152.tolist()
+    b_152 = b_152.tolist()
+    c_152 = c_152.tolist()
+    d_152  = d_152.tolist()
+    f_152 = f_152.tolist()
+    agpa_152 = agpa_152.tolist()
+    
     i = -1
+    dict_152 = {   "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_152):
         i = i + 1
-        dict_152 = {
-            "lists": chunks_152[i]
-        }
+        if "%" in str(chunks_152[i][2]) :
+            dict_152['Professor'].append(chunks_152[i][14])
+            dict_152['Course_Code'].append(chunks_152[i][0])
+            dict_152['A%'].append(chunks_152[i][2])
+            dict_152['B%'].append(chunks_152[i][4])
+            dict_152['C%'].append(chunks_152[i][6])
+            dict_152['D%'].append(chunks_152[i][8])
+            dict_152['F%'].append(chunks_152[i][10])
+            dict_152['AGPA'].append(chunks_152[i][12])
+            
+            print(dict_152)
+
         if i == (len(chunks_152)-1):
             break
 
+                    #Math 251
     math_251_to_285_data = collect_data_between_251_and_285(pdf_text)
 
 
@@ -673,15 +853,54 @@ if __name__ == '__main__':
     chunks_251 = [lines_251[x:x + 15] for x in range(0, len(lines_251), 15)]
     chunks_251 = chunks_251[:-1]     
 
-    print(chunks_251)
+    prof_251 = np.array([])
+    course_251 = np.array([])
+    a_251 = np.array([])  
+    b_251 = np.array([])
+    c_251 = np.array([])
+    d_251  = np.array([])
+    f_251 = np.array([])
+    agpa_251 = np.array([])
 
+    prof_251 = prof_251.tolist()
+    course_251 = course_251.tolist()
+    a_251 = a_251.tolist()
+    b_251 = b_251.tolist()
+    c_251 = c_251.tolist()
+    d_251  = d_251.tolist()
+    f_251 = f_251.tolist()
+    agpa_251 = agpa_251.tolist()
+    
     i = -1
+    dict_251 = {   "Professor": [],
+                 "Course_Code": [], 
+                 "A%": [], 
+                 "B%": [],
+                 "C%": [],
+                 "D%": [],
+                 "F%": [],
+                 "AGPA": []
+            }
+    
     while i <= len(chunks_251):
         i = i + 1
-        dict_251 = {
-            "lists": chunks_251[i]
-        }
-        if i == (len(chunks_251)-1):
+        if "%" in str(chunks_251[i][2]) :
+            dict_251['Professor'].append(chunks_251[i][14])
+            dict_251['Course_Code'].append(chunks_251[i][0])
+            dict_251['A%'].append(chunks_251[i][2])
+            dict_251['B%'].append(chunks_251[i][4])
+            dict_251['C%'].append(chunks_251[i][6])
+            dict_251['D%'].append(chunks_251[i][8])
+            dict_251['F%'].append(chunks_251[i][10])
+            dict_251['AGPA'].append(chunks_251[i][12])
+            
+            print(dict_251)
+
+        if i == (len(chunks_150)-1):
             break
 
-    app.run(debug=True)
+
+
+
+
+    app.run(debug=True) #Final Statement
