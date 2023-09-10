@@ -2,8 +2,10 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Grid, Container, Paper, Button} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function InputFields() {
+  const navigate = useNavigate();
   return (
     <React.Fragment>
     <Container maxWidth="lg" sx={{ mb: 4 }}>
@@ -28,7 +30,9 @@ export default function InputFields() {
           />
         </Grid>
         <Grid item xs={12} sm={1}>
-            <Button variant="contained" sx = {{bgcolor: '#EA3B52'}}>
+            <Button variant="contained" sx = {{bgcolor: '#EA3B52'}}
+              href = '/viewGrades'
+            >
                 Search
             </Button>
         </Grid>
