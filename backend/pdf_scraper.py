@@ -1,7 +1,9 @@
 import fitz
 import requests
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 engrPdfUrl = 'https://web-as.tamu.edu/GradeReports/PDFReports/20231/grd20231EN.pdf'
 artAndScienceUrl = "https://web-as.tamu.edu/GradeReports/PDFReports/20231/grd20231AT.pdf"
 
