@@ -135,6 +135,7 @@ function TablePaginationActions(props) {
             <TableHead>
               <TableRow sx = {{bgcolor: '#C32148'}} >
                 <TableCell sx = {{fontSize: 16}}>Section</TableCell>
+                <TableCell sx = {{fontSize: 16}}>Term</TableCell>
                 <TableCell sx = {{fontSize: 16}}>% of As</TableCell>
                 <TableCell sx = {{fontSize: 16}}>% of Bs</TableCell>
                 <TableCell sx = {{fontSize: 16}}>% of Cs</TableCell>
@@ -155,6 +156,7 @@ function TablePaginationActions(props) {
                   <TableCell component="th" scope="row">
                     {row.course}
                   </TableCell>
+                  <TableCell>{row.term}</TableCell>
                   <TableCell>{row.perA}</TableCell>
                   <TableCell>{row.perB}</TableCell>
                   <TableCell>{row.perC}</TableCell>

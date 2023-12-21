@@ -4,8 +4,10 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
-engrPdfUrl = 'https://web-as.tamu.edu/GradeReports/PDFReports/20231/grd20231EN.pdf'
-artAndScienceUrl = "https://web-as.tamu.edu/GradeReports/PDFReports/20231/grd20231AT.pdf"
+engrPdfSpring23Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20231/grd20231EN.pdf'
+artAndScienceSpring23Url = "https://web-as.tamu.edu/GradeReports/PDFReports/20231/grd20231AT.pdf"
+engrPdfFall22Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20223/grd20223EN.pdf'
+artAndScienceFall22Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20223/grd20223AT.pdf'
 
 def extract_text_from_pdf(pdf_url):
     response = requests.get(pdf_url, stream=True)
@@ -93,44 +95,48 @@ def collect_data_between_308_and_309(pdf_text):
             collected_data.append(line)
     return collected_data
 
-engr_pdf_text = extract_text_from_pdf(engrPdfUrl)
-art_science_text = extract_text_from_pdf(artAndScienceUrl)
+engr_pdf_spring23_text = extract_text_from_pdf(engrPdfSpring23Url)
+art_science_spring23_text = extract_text_from_pdf(artAndScienceSpring23Url)
+engr_pdf_fall22_text = extract_text_from_pdf(engrPdfFall22Url)
+art_science_fall22_text = extract_text_from_pdf(artAndScienceFall22Url)
 
 #formatting data for all classes
-engr_class_data = collect_data_for_all_classes(engr_pdf_text)
-lines_engr_classes = [line.strip() for line in engr_class_data]
-filter_lines_classes = []
-for i in lines_engr_classes:
-    if ("SECTION" in i):
-        append = False
-    if ("DEPARTMENT" in i):
-        append = False
-    if('Undergraduate' in i):
-        append = True
-        continue
-    if append: 
-        filter_lines_classes.append(i)
-art_science_class_data = collect_data_for_all_classes(art_science_text)
-lines_art_science_classes = [line.strip() for line in art_science_class_data]
-for i in lines_art_science_classes:
-    if ("SECTION" in i):
-        append = False
-    if ("DEPARTMENT" in i):
-        append = False
-    if('ASTR-102' in i):
-        append = False
-    if('Undergraduate' in i):
-        append = True
-        continue
-    if append: 
-        filter_lines_classes.append(i)
-chunks_classes = [filter_lines_classes[x:x + 15] for x in range(0, len(filter_lines_classes), 15)]
-chunks_classes = chunks_classes[:-1]
-for i in chunks_classes:
-    i.pop(13)
+def format_all_classes(engr_pdf, art_science_pdf):
+    engr_class_data = collect_data_for_all_classes(engr_pdf)
+    lines_engr_classes = [line.strip() for line in engr_class_data]
+    filter_lines_classes = []
+    for i in lines_engr_classes:
+        if ("SECTION" in i):
+            append = False
+        if ("DEPARTMENT" in i):
+            append = False
+        if('Undergraduate' in i):
+            append = True
+            continue
+        if append: 
+            filter_lines_classes.append(i)
+    art_science_class_data = collect_data_for_all_classes(art_science_pdf)
+    lines_art_science_classes = [line.strip() for line in art_science_class_data]
+    for i in lines_art_science_classes:
+        if ("SECTION" in i):
+            append = False
+        if ("DEPARTMENT" in i):
+            append = False
+        if('ASTR-102' in i):
+            append = False
+        if('Undergraduate' in i):
+            append = True
+            continue
+        if append: 
+            filter_lines_classes.append(i)
+    chunks_classes = [filter_lines_classes[x:x + 15] for x in range(0, len(filter_lines_classes), 15)]
+    chunks_classes = chunks_classes[:-1]
+    for i in chunks_classes:
+        i.pop(13)
+    return chunks_classes
 
 #formatting csce_120_to_121_data
-csce_120_to_121_data = collect_data_between_120_and_121(engr_pdf_text)
+csce_120_to_121_data = collect_data_between_120_and_121(engr_pdf_spring23_text)
 lines_120 = [line.strip() for line in csce_120_to_121_data]
 filter_lines_120 = []
 for i in lines_120:
@@ -146,7 +152,7 @@ for i in chunks_120:
     i.pop(13)
 
 #Formatting ENGR 102 Data
-engr_102_to_216_data = collect_data_between_102_and_216(engr_pdf_text)
+engr_102_to_216_data = collect_data_between_102_and_216(engr_pdf_spring23_text)
 lines_102 = [line.strip() for line in engr_102_to_216_data]
 filter_lines_102 = []
 for i in lines_102:
@@ -162,7 +168,7 @@ for i in chunks_102:
     i.pop(13)
 
 #Formatting ENGR 216 Data
-engr_216_to_217_data = collect_data_between_216_and_217(engr_pdf_text)
+engr_216_to_217_data = collect_data_between_216_and_217(engr_pdf_spring23_text)
 lines_216 = [line.strip() for line in engr_216_to_217_data]
 filter_lines_216 = []
 for i in lines_216:
@@ -178,7 +184,7 @@ for i in chunks_216:
     i.pop(13)
 
 #Formatting MATH 152 Data
-math_152_to_167_data = collect_data_between_152_and_167(art_science_text)
+math_152_to_167_data = collect_data_between_152_and_167(art_science_spring23_text)
 lines_152 = [line.strip() for line in math_152_to_167_data]
 filter_lines_152 = []
 for i in lines_152:
@@ -194,7 +200,7 @@ for i in chunks_152:
     i.pop(13)
 
 #Formatting MATH 308 Data
-math_308_to_309_data = collect_data_between_308_and_309(art_science_text)
+math_308_to_309_data = collect_data_between_308_and_309(art_science_spring23_text)
 lines_308 = [line.strip() for line in math_308_to_309_data]
 filter_lines_308 = []
 for i in lines_308:
@@ -214,10 +220,17 @@ for i in chunks_308:
 def get_courses():
     courses_list = []
     count = 0
+    chunks_classes = format_all_classes(engr_pdf_spring23_text, art_science_spring23_text)
     for i in chunks_classes:
         if("COURSE" in i[0]):
             continue
-        courses_list.append({'id': count, "course": i[0], 'professor': i[13], 'perA': i[2], 'perB': i[4], 'perC': i[6], 'perD': i[8], 'perF': i[10], 'GPA': i[12] })
+        courses_list.append({'id': count, 'term': 'Spring 2023', "course": i[0], 'professor': i[13], 'perA': i[2], 'perB': i[4], 'perC': i[6], 'perD': i[8], 'perF': i[10], 'GPA': i[12] })
+        count = count + 1
+    chunks_classes2 = format_all_classes(engr_pdf_fall22_text, art_science_fall22_text)
+    for i in chunks_classes2:
+        if("COURSE" in i[0]):
+            continue
+        courses_list.append({'id': count, 'term': 'Fall 2022', "course": i[0], 'professor': i[13], 'perA': i[2], 'perB': i[4], 'perC': i[6], 'perD': i[8], 'perF': i[10], 'GPA': i[12] })
         count = count + 1
     return jsonify(courses_list)
 @app.route('/get-course-numbers')
@@ -225,7 +238,18 @@ def get_course_numbers():
     course_numbers_list = []
     course_list = []
     count = 0
+    chunks_classes = format_all_classes(engr_pdf_spring23_text, art_science_spring23_text)
+    chunks_classes2 = format_all_classes(engr_pdf_fall22_text, art_science_fall22_text)
     for i in chunks_classes:
+        if("COURSE" in i[0]):
+            continue
+        course = i[0].split('-')
+        course = course[0:2]
+        if course not in course_list:
+            course_list.append(course)
+            course_numbers_list.append({'id': count,'subject': course[0], 'number': course[1]})
+            count = count + 1
+    for i in chunks_classes2:
         if("COURSE" in i[0]):
             continue
         course = i[0].split('-')
@@ -240,7 +264,16 @@ def get_professors():
     professor_list = []
     professors = []
     count = 0
+    chunks_classes = format_all_classes(engr_pdf_spring23_text, art_science_spring23_text)
+    chunks_classes2 = format_all_classes(engr_pdf_fall22_text, art_science_fall22_text)
     for i in chunks_classes:
+        if("COURSE" in i[0]):
+            continue
+        if i[13] not in professor_list:
+            professor_list.append(i[13])
+            professors.append({'id': count, 'name': i[13]})
+            count = count + 1
+    for i in chunks_classes2:
         if("COURSE" in i[0]):
             continue
         if i[13] not in professor_list:

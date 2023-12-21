@@ -136,6 +136,7 @@ export default function ViewGrades(){
           <TableHead>
             <TableRow sx = {{bgcolor: '#C32148'}} >
               <TableCell sx = {{fontSize: 16}}>Section</TableCell>
+              <TableCell sx = {{fontSize: 16}}>Term</TableCell>
               <TableCell sx = {{fontSize: 16}}>Professor</TableCell>
               <TableCell sx = {{fontSize: 16}}>% of As</TableCell>
               <TableCell sx = {{fontSize: 16}}>% of Bs</TableCell>
@@ -157,6 +158,7 @@ export default function ViewGrades(){
                 <TableCell component="th" scope="row">
                   {row.course}
                 </TableCell>
+                <TableCell>{row.term}</TableCell>
                 <TableCell>{row.professor}</TableCell>
                 <TableCell>{row.perA}</TableCell>
                 <TableCell>{row.perB}</TableCell>
