@@ -9,6 +9,7 @@ artAndScienceSpring23Url = "https://web-as.tamu.edu/GradeReports/PDFReports/2023
 engrPdfFall22Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20223/grd20223EN.pdf'
 artAndScienceFall22Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20223/grd20223AT.pdf'
 
+
 def extract_text_from_pdf(pdf_url):
     response = requests.get(pdf_url, stream=True)
     with fitz.open("pdf", response.content) as doc:

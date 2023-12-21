@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path ="/" element={<InputFields/>} />
           <Route path = "/viewGrades/:course/:code" element={<ViewGrades/>}/>
-          <Route path = "/viewProfessor/:profName" element={<ViewProfessor/>}/>
+          <Route path = "/viewProfessor/:profName/:subject" element={<ViewProfessor/>}/>
         </Routes>
       </BrowserRouter>
     </div>

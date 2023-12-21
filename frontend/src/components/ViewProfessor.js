@@ -110,6 +110,7 @@ function TablePaginationActions(props) {
       };
       const prof = useParams();
       const desired_prof = prof.profName
+      const desired_subject = prof.subject
       useEffect(() => {
         // Make a GET request to your Flask back-end
         axios.get('http://127.0.0.1:5000/get-courses')
@@ -122,7 +123,7 @@ function TablePaginationActions(props) {
       }, []);
       useEffect(() => {
         // Filter the courseData based on the selected course_id
-        const filteredData = courseData.filter((row) => row.professor === desired_prof);
+        const filteredData = courseData.filter((row) => row.professor === desired_prof & row.course.substring(0,4) === desired_subject);
         setFilteredCourseData(filteredData);
       }, [desired_prof, courseData]);
       return( 

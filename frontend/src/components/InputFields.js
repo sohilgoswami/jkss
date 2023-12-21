@@ -146,11 +146,11 @@ export default function InputFields() {
               </Card>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
-              <Typography fontSize="1.5rem" variant="h4" textAlign="right" sx={{ my: 1, marginTop: {sm:3, md:12}, marginBottom: { sm: 0, md: -5 }, mr: {md:0, sm:5} }}>
+              <Typography fontSize="1.5rem" variant="h4" textAlign="right" sx={{ my: 1, marginTop: {sm:3, md:8}, marginBottom: { sm: 0, md: -5 }, mr: {md:0, sm:5} }}>
                 Search for grade distributions based on professor
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={12} md={6} sx={{ml:'auto', mr:2, marginTop:{md:-40}}}>
+            <Grid item xs={12} sm={12} md={6} sx={{ml:'auto', mr:2, marginTop:{md:-45}}}>
               <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, bgcolor: '#9e2b56' }}>
                 <Grid container spacing={3}>
                   {/* Subject Field */}
@@ -167,14 +167,26 @@ export default function InputFields() {
                       renderInput={(params) => <TextField {...params} label="Professor"  />}
                     />
                   </Grid>
-
+                  <Grid item xs={12} sm={12} md={12}>
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      sx={{ bgcolor: '#FFFFFF',}}
+                      options={courseSubject}
+                      value={selectedSubject}
+                      onChange={(event, newValue) => {
+                        setSelectedSubject(newValue);
+                      }}
+                      renderInput={(params) => <TextField {...params} label="Department"  />}
+                    />
+                  </Grid>
                   {/* Search Button */}
                   <Grid item xs={12} sm={12} md={12}>
                     <Button
                       variant="contained"
                       sx={{ bgcolor: '#EA3B52' }}
                       onClick={() => {
-                        navigate('/viewProfessor/' + selectedProfessor, { replace: true });
+                        navigate('/viewProfessor/' + selectedProfessor + '/' + selectedSubject, { replace: true });
                       }}
                     >
                       Search
