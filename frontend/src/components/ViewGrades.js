@@ -18,6 +18,10 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import TableHead from '@mui/material/TableHead';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -84,19 +88,17 @@ function createData(course, professor, as, bs, cs, ds, fs, GPA) {
   return { course, professor, as, bs, cs, ds, fs, GPA };
 }
 
-const rows = [
-  createData('CHEM 107', 'Altemose A','27.86%', '38.71%','25.81','5.28%','2.35%','2.844'),
-  createData('CHEM 107', 'Goodey J','22.12%', '36.87%','29.49%','5.99%','5.53%','2.640'),
-  createData('CHEM 107', 'Wang X','23.68%', '31.58%','23.68','15.79%','5.26%','2.844'),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
+
 
 export default function ViewGrades(){
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [courseData, setCourseData] = useState([]);
+    const [filteredCourseData, setFilteredCourseData] = useState([]);
   
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
-      page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+      page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filteredCourseData.length) : 0;
   
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -106,13 +108,34 @@ export default function ViewGrades(){
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
     };
+    const course_id = useParams();
+    const desired_course = course_id.course + '-' + course_id.code;
+    useEffect(() => {
+      // Make a GET request to your Flask back-end
+      axios.get('http://127.0.0.1:5000/get-courses')
+        .then(response => {
+          setCourseData(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error)
+        });
+    }, []);
+    useEffect(() => {
+      // Filter the courseData based on the selected course_id
+      const filteredData = courseData.filter((row) => row.course.substring(0,8) === desired_course);
+      setFilteredCourseData(filteredData);
+      console.log(filteredData);
+    }, [desired_course, courseData]);
     return( 
-        <Container maxWidth="lg" sx={{ mt: 4 }}>
+        <Container maxWidth="lg" sx={{ mt: 15 }}>
+          <Typography textAlign="center" fontWeight="bold" fontSize="2rem" sx = {{lineHeight:{xs:1.2, s:1.2}, mb: 3}}>
+            Grade Distribution for <span style={{ color: '#B43757' }}>{course_id.course + " " + course_id.code}</span> 
+          </Typography>
         <TableContainer component={Paper} maxWidth="lg" sx={{ mb: 4 }}>
         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
           <TableHead>
             <TableRow sx = {{bgcolor: '#C32148'}} >
-              <TableCell sx = {{fontSize: 16}}>Course</TableCell>
+              <TableCell sx = {{fontSize: 16}}>Section</TableCell>
               <TableCell sx = {{fontSize: 16}}>Professor</TableCell>
               <TableCell sx = {{fontSize: 16}}>% of As</TableCell>
               <TableCell sx = {{fontSize: 16}}>% of Bs</TableCell>
@@ -124,34 +147,23 @@ export default function ViewGrades(){
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
+              ? filteredCourseData.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : filteredCourseData
             ).map((row) => (
-              <TableRow key={row.name}> 
+              <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
                   {row.course}
                 </TableCell>
-                <TableCell  align="right">
-                  {row.professor}
-                </TableCell>
-                <TableCell  align="right">
-                  {row.as}
-                </TableCell>
-                <TableCell align="right">
-                  {row.bs}
-                </TableCell>
-                <TableCell align="right">
-                  {row.cs}
-                </TableCell>
-                <TableCell align="right">
-                  {row.ds}
-                </TableCell>
-                <TableCell align="right">
-                  {row.fs}
-                </TableCell>
-                <TableCell align="right">
-                  {row.GPA}
-                </TableCell>
+                <TableCell>{row.professor}</TableCell>
+                <TableCell>{row.perA}</TableCell>
+                <TableCell>{row.perB}</TableCell>
+                <TableCell>{row.perC}</TableCell>
+                <TableCell>{row.perD}</TableCell>
+                <TableCell>{row.perF}</TableCell>
+                <TableCell>{row.GPA}</TableCell>
               </TableRow>
             ))}
             {emptyRows > 0 && (
@@ -165,7 +177,7 @@ export default function ViewGrades(){
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                 colSpan={8}
-                count={rows.length}
+                count={filteredCourseData.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{

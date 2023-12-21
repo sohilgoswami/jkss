@@ -213,11 +213,41 @@ for i in chunks_308:
 @app.route('/get-courses')
 def get_courses():
     courses_list = []
+    count = 0
     for i in chunks_classes:
         if("COURSE" in i[0]):
             continue
-        courses_list.append({"course": i[0], 'professor': i[13], 'perA': i[2], 'perB': i[4], 'perC': i[6], 'perD': i[8], 'perF': i[10], 'GPA': i[12] })
+        courses_list.append({'id': count, "course": i[0], 'professor': i[13], 'perA': i[2], 'perB': i[4], 'perC': i[6], 'perD': i[8], 'perF': i[10], 'GPA': i[12] })
+        count = count + 1
     return jsonify(courses_list)
+@app.route('/get-course-numbers')
+def get_course_numbers():
+    course_numbers_list = []
+    course_list = []
+    count = 0
+    for i in chunks_classes:
+        if("COURSE" in i[0]):
+            continue
+        course = i[0].split('-')
+        course = course[0:2]
+        if course not in course_list:
+            course_list.append(course)
+            course_numbers_list.append({'id': count,'subject': course[0], 'number': course[1]})
+            count = count + 1
+    return jsonify(course_numbers_list)
+@app.route('/get-professors')
+def get_professors():
+    professor_list = []
+    professors = []
+    count = 0
+    for i in chunks_classes:
+        if("COURSE" in i[0]):
+            continue
+        if i[13] not in professor_list:
+            professor_list.append(i[13])
+            professors.append({'id': count, 'name': i[13]})
+            count = count + 1
+    return jsonify(professors)
 @app.route('/get-course/120')
 def get_course_120():
     csce_120_list = []
