@@ -8,8 +8,10 @@ engrPdfSpring23Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20231/grd2
 artAndScienceSpring23Url = "https://web-as.tamu.edu/GradeReports/PDFReports/20231/grd20231AT.pdf"
 engrPdfFall22Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20223/grd20223EN.pdf'
 artAndScienceFall22Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20223/grd20223AT.pdf'
-
-
+engrPdfSpring22Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20221/grd20221EN.pdf'
+artAndScienceSpring22Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20221/grd20221SC.pdf'
+engrPdfFall21Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20213/grd20213EN.pdf'
+artAndScienceFall21Url = 'https://web-as.tamu.edu/GradeReports/PDFReports/20213/grd20213SC.pdf'
 def extract_text_from_pdf(pdf_url):
     response = requests.get(pdf_url, stream=True)
     with fitz.open("pdf", response.content) as doc:
@@ -100,6 +102,10 @@ engr_pdf_spring23_text = extract_text_from_pdf(engrPdfSpring23Url)
 art_science_spring23_text = extract_text_from_pdf(artAndScienceSpring23Url)
 engr_pdf_fall22_text = extract_text_from_pdf(engrPdfFall22Url)
 art_science_fall22_text = extract_text_from_pdf(artAndScienceFall22Url)
+engr_pdf_spring22_text = extract_text_from_pdf(engrPdfSpring22Url)
+art_science_spring22_text = extract_text_from_pdf(artAndScienceSpring22Url)
+engr_pdf_fall21_text = extract_text_from_pdf(engrPdfFall21Url)
+art_science_fall21_text = extract_text_from_pdf(artAndScienceFall21Url)
 
 #formatting data for all classes
 def format_all_classes(engr_pdf, art_science_pdf):
@@ -233,6 +239,18 @@ def get_courses():
             continue
         courses_list.append({'id': count, 'term': 'Fall 2022', "course": i[0], 'professor': i[13], 'perA': i[2], 'perB': i[4], 'perC': i[6], 'perD': i[8], 'perF': i[10], 'GPA': i[12] })
         count = count + 1
+    chunks_classes3 = format_all_classes(engr_pdf_spring22_text, art_science_spring22_text)
+    for i in chunks_classes3:
+        if("COURSE" in i[0]):
+            continue
+        courses_list.append({'id': count, 'term': 'Spring 2022', "course": i[0], 'professor': i[13], 'perA': i[2], 'perB': i[4], 'perC': i[6], 'perD': i[8], 'perF': i[10], 'GPA': i[12] })
+        count = count + 1
+    chunks_classes4 = format_all_classes(engr_pdf_fall21_text, art_science_fall21_text)
+    for i in chunks_classes4:
+        if("COURSE" in i[0]):
+            continue
+        courses_list.append({'id': count, 'term': 'Fall 2021', "course": i[0], 'professor': i[13], 'perA': i[2], 'perB': i[4], 'perC': i[6], 'perD': i[8], 'perF': i[10], 'GPA': i[12] })
+        count = count + 1
     return jsonify(courses_list)
 @app.route('/get-course-numbers')
 def get_course_numbers():
@@ -241,6 +259,8 @@ def get_course_numbers():
     count = 0
     chunks_classes = format_all_classes(engr_pdf_spring23_text, art_science_spring23_text)
     chunks_classes2 = format_all_classes(engr_pdf_fall22_text, art_science_fall22_text)
+    chunks_classes3 = format_all_classes(engr_pdf_spring22_text, art_science_spring22_text)
+    chunks_classes4 = format_all_classes(engr_pdf_fall21_text, art_science_fall21_text)
     for i in chunks_classes:
         if("COURSE" in i[0]):
             continue
@@ -251,6 +271,24 @@ def get_course_numbers():
             course_numbers_list.append({'id': count,'subject': course[0], 'number': course[1]})
             count = count + 1
     for i in chunks_classes2:
+        if("COURSE" in i[0]):
+            continue
+        course = i[0].split('-')
+        course = course[0:2]
+        if course not in course_list:
+            course_list.append(course)
+            course_numbers_list.append({'id': count,'subject': course[0], 'number': course[1]})
+            count = count + 1
+    for i in chunks_classes3:
+        if("COURSE" in i[0]):
+            continue
+        course = i[0].split('-')
+        course = course[0:2]
+        if course not in course_list:
+            course_list.append(course)
+            course_numbers_list.append({'id': count,'subject': course[0], 'number': course[1]})
+            count = count + 1
+    for i in chunks_classes4:
         if("COURSE" in i[0]):
             continue
         course = i[0].split('-')
@@ -267,6 +305,8 @@ def get_professors():
     count = 0
     chunks_classes = format_all_classes(engr_pdf_spring23_text, art_science_spring23_text)
     chunks_classes2 = format_all_classes(engr_pdf_fall22_text, art_science_fall22_text)
+    chunks_classes3 = format_all_classes(engr_pdf_spring22_text, art_science_spring22_text)
+    chunks_classes4 = format_all_classes(engr_pdf_fall21_text, art_science_fall21_text)
     for i in chunks_classes:
         if("COURSE" in i[0]):
             continue
@@ -275,6 +315,20 @@ def get_professors():
             professors.append({'id': count, 'name': i[13]})
             count = count + 1
     for i in chunks_classes2:
+        if("COURSE" in i[0]):
+            continue
+        if i[13] not in professor_list:
+            professor_list.append(i[13])
+            professors.append({'id': count, 'name': i[13]})
+            count = count + 1
+    for i in chunks_classes3:
+        if("COURSE" in i[0]):
+            continue
+        if i[13] not in professor_list:
+            professor_list.append(i[13])
+            professors.append({'id': count, 'name': i[13]})
+            count = count + 1
+    for i in chunks_classes4:
         if("COURSE" in i[0]):
             continue
         if i[13] not in professor_list:
