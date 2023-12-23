@@ -1,17 +1,13 @@
-import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Grid, Container, Paper, Button, Card, CardMedia} from '@mui/material';
+import { Grid, Container, Paper, Button, Card, CardMedia,} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material';
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
 import axios from 'axios';
 import { useEffect } from 'react';
 
-export default function InputFields() {
+function InputFields() {
   const navigate = useNavigate();
   const [courseData, setCourseData] = useState([]);
   const [code, setCode] = useState('')
@@ -62,7 +58,6 @@ export default function InputFields() {
   }, []);
 
   return (
-    <React.Fragment>
     <Container maxWidth="lg" sx={{ mb: 4,mt:15}}>
     <Typography textAlign="center" fontWeight="bold" fontSize="3rem" sx = {{lineHeight:{xs:1.2, s:1.2},}}>
           Choose the best professor <span style={{ color: '#B43757' }}>for you</span>!
@@ -198,6 +193,7 @@ export default function InputFields() {
           </Grid>
         </Paper>
     </Container>
-    </React.Fragment>
+
   );
 }
+export default InputFields;
