@@ -22,6 +22,8 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -159,7 +161,11 @@ export default function ViewGrades(){
                   {row.course}
                 </TableCell>
                 <TableCell>{row.term}</TableCell>
-                <TableCell>{row.professor}</TableCell>
+                <TableCell>
+                  <Button href={`/viewProfessor/${row.professor}/${row.course.substring(0,4)}`} style={{ color: '#C32148' }}>
+                    {row.professor}
+                  </Button>
+                </TableCell>
                 <TableCell>{row.perA}</TableCell>
                 <TableCell>{row.perB}</TableCell>
                 <TableCell>{row.perC}</TableCell>

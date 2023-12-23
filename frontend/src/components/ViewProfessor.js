@@ -22,6 +22,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Button from '@mui/material/Button';
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -155,7 +156,7 @@ function TablePaginationActions(props) {
               ).map((row) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row">
-                    {row.course}
+                    <Button href={"/viewGrades/" + row.course.substring(0,4) + "/" + row.course.substring(5,8)} sx = {{color: '#C32148'}}>{row.course}</Button>
                   </TableCell>
                   <TableCell>{row.term}</TableCell>
                   <TableCell>{row.perA}</TableCell>
