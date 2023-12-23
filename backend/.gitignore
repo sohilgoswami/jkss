@@ -1,5 +1,4 @@
-# Virtual environment
-venv/
+
 
 # Checkpoint files
 model.ckpt*
