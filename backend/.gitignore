@@ -1,4 +1,5 @@
-
+#vitrual environment
+venv/
 
 # Checkpoint files
 model.ckpt*
