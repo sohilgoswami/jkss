@@ -17,6 +17,7 @@ function InputFields() {
   const [selectedCode, setSelectedCode] = useState('');
   const [professors, setProfessors] = useState([]);
   const [selectedProfessor, setSelectedProfessor] = useState('');
+  const [selectedProfSubject, setSelectedProfSubject] = useState('');
   useEffect(() => {
     // Fetch course data
     axios.get('http://127.0.0.1:5000/get-course-numbers')
@@ -58,7 +59,7 @@ function InputFields() {
   }, []);
 
   return (
-    <Container maxWidth="lg" sx={{ mb: 4,mt:15}}>
+    <Container maxWidth="lg" sx={{ mb: 4,mt:{xs:18,sx:15, md:15}}}>
     <Typography textAlign="center" fontWeight="bold" fontSize="3rem" sx = {{lineHeight:{xs:1.2, s:1.2},}}>
           Choose the best professor <span style={{ color: '#B43757' }}>for you</span>!
     </Typography>
@@ -71,7 +72,7 @@ function InputFields() {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12} md={6} sx = {{ml:2}}>
-            <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, bgcolor: '#9e2b56'}}>
+            <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, bgcolor: '#9e2b56', mr:{xs:2}}}>
               <Grid container spacing={3}>
                 {/* Subject Field */}
                 <Grid item xs={12} sm={12} md={12}>
@@ -104,7 +105,7 @@ function InputFields() {
                 </Grid>
 
                 {/* Search Button */}
-                <Grid item xs={12} sm={12} md={12}>
+                <Grid item xs={12} sm={12} md={12} sx={{ textAlign: 'center' }}>
                   <Button
                     variant="contained"
                     sx={{ bgcolor: '#EA3B52' }}
@@ -118,8 +119,8 @@ function InputFields() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={12} md={5.5}>
-              <Card sx = {{marginLeft:8}}>
+          <Grid item xs={12} sm={12} md={5.8}>
+              <Card sx = {{marginLeft:3, marginRight:5, mb:1}}>
                 <CardMedia
                   component="img"
                   src='https://i.ibb.co/wsqJ2hK/REV-PNG-CROPPED.png" alt="REV-PNG-CROPPED'
@@ -133,7 +134,7 @@ function InputFields() {
           <Grid container spacing={0} sx = {{mt:5}}>
             {/* Adjust the width of the Grid container */}
             <Grid item xs={12} sm={12} md={5.5} sx={{mt:3, mb:3}}>
-              <Card sx={{ marginLeft: 3 }}>
+              <Card sx={{ marginLeft: 3, marginRight: {xs:3, md:0} }}>
                 <CardMedia
                   component="img"
                   src='https://i.ibb.co/8768hh4/SIT-REV.png" alt="SIT-REV'
@@ -141,12 +142,12 @@ function InputFields() {
               </Card>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
-              <Typography fontSize="1.5rem" variant="h4" textAlign="right" sx={{ my: 1, marginTop: {sm:3, md:8}, marginBottom: { sm: 0, md: -5 }, mr: {md:0, sm:5} }}>
+              <Typography fontSize="1.5rem" variant="h4" textAlign="right" sx={{ my: 1, marginTop: {sm:3, md:8}, marginBottom: { sm: 0, md: -5 }, mr: {xs:2, md:0, sm:5} }}>
                 Search for grade distributions based on professor
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12} md={6} sx={{ml:'auto', mr:2, marginTop:{md:-45}}}>
-              <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, bgcolor: '#9e2b56' }}>
+              <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, ml: {xs:2, md:0},bgcolor: '#9e2b56' }}>
                 <Grid container spacing={3}>
                   {/* Subject Field */}
                   <Grid item xs={12} sm={12} md={12}>
@@ -168,20 +169,20 @@ function InputFields() {
                       id="combo-box-demo"
                       sx={{ bgcolor: '#FFFFFF',}}
                       options={courseSubject}
-                      value={selectedSubject}
+                      value={selectedProfSubject}
                       onChange={(event, newValue) => {
-                        setSelectedSubject(newValue);
+                        setSelectedProfSubject(newValue);
                       }}
                       renderInput={(params) => <TextField {...params} label="Department"  />}
                     />
                   </Grid>
                   {/* Search Button */}
-                  <Grid item xs={12} sm={12} md={12}>
+                  <Grid item xs={12} sm={12} md={12} sx={{ textAlign: 'center' }}>
                     <Button
                       variant="contained"
                       sx={{ bgcolor: '#EA3B52' }}
                       onClick={() => {
-                        navigate('/viewProfessor/' + selectedProfessor + '/' + selectedSubject, { replace: true });
+                        navigate('/viewProfessor/' + selectedProfessor + '/' + selectedProfSubject, { replace: true });
                       }}
                     >
                       Search

@@ -5,9 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import '@fontsource/caveat-brush';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import HouseIcon from '@mui/icons-material/House';
+
 
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 
@@ -19,7 +17,7 @@ function Menubar(){
     return(
       <AppBar sx = {{bgcolor: '#6a1d3a',  borderBottom: trigger ? "1px solid rgba(0, 0, 0, 0.12)" : "none" }}>
       <Toolbar>
-        <Button href="/" sx={{ ml: '15px' }}>
+        <Button href="/" sx={{ ml: {xs:'5px',md:'15px'} }}>
           <Box
             component="img"
             sx={{
